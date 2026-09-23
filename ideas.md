@@ -1,7 +1,7 @@
 # StockReader
 
 
-### Day 0
+## Day 0 
 Inspired by a cool cv project I saw on LinkedIn that showcased Pokémon card prices using snapchats vr glasses
 https://lnkd.in/p/eB9JYy4t
 
@@ -33,5 +33,86 @@ My idea for tech stack from now (0 planning so far) is:
 Will be splitting this proj up into Daily inputs ~ As I am a college student and work two jobs everyday may not have an 
 input!
 
+## Day 1 - Learning PyTorch + Finding Datasets
+
+Today I want to get familiar with PyTorch as im pretty sure that will be the meat and bones of this project
+
+I know that this is a image recognition proj so Deep Learning is necessary.
+
+# Transfer Learning
+After doing some research came across the concept of Transfer Learning
+
+Currently watching this video https://www.youtube.com/watch?v=K0lWSB2QoIQ
+
+- Transfer Learning is a method where a model made for a task is used for another task with slight modifications
+- Typically change the last layer of model
+- Good for rapid generation of models
+
+reading through this https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html
+
+I don't think ImageNet will be a dataset that would be good for this project.
+Currently searching for logo datasets
+
+I think starting with S&P datasets would make the most sense~
+Found this dataset I think I will use https://github.com/msn199959/Logo-2k-plus-Dataset
+
+This API could be what I use to get the clean logos that will show up on the scans https://brandfetch.com/developers
+
+### Dataset - Logo-2k-plus
+Will be using logos from the S&P 100
+First will parse them into a folder /logos
+
+Used Claude Code to get list of S&P folders 
 
 
+    'SP100_FOLDERS = [
+    # Electronic
+    'AMD',
+    'Apple',
+    'Cisco Systems',
+    'Honeywell',
+    'IBM',
+    'Intel',
+    'Microsoft',
+    'Texas Instruments',  # found under Medical/
+
+    # Transportation
+    'Tesla',
+
+    # Accessories
+    'Nike',
+
+    # Food
+    'coca cola',
+    'Costco Wholesale',
+    'McDonald\'s',
+    'pepsi',
+    'Starbucks',
+
+    # Institution
+    'Amazon at Lab126',
+    'Chevron',
+    'Exxon',
+    'General Electric',
+    'Google',
+    'J.P. Morgan',
+    'John Deere',
+    'Marathon Petroleum',
+    'Marriott International',
+    'Target',
+    'Walmart',
+
+    # Cosmetic
+    'Johnson & Johnson',
+
+    # Medical
+    'Colgate',
+
+    # Leisure
+    'Disney']
+
+Looking at Amazon at Lab126 it looks outdated, might want to use better data?
+
+Even google is old the Dataset seems extremely old, Maybe swap to LogoDet-3k?
+
+I see that in LogoDet-3k it is a bit different in that it labels items
