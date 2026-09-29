@@ -116,3 +116,80 @@ Looking at Amazon at Lab126 it looks outdated, might want to use better data?
 Even google is old the Dataset seems extremely old, Maybe swap to LogoDet-3k?
 
 I see that in LogoDet-3k it is a bit different in that it labels items
+
+## Day 2 - Dataset Parsing
+Today I want to complete parsing the dataset into a logos folder
+
+I find interesting about these datasets is that there aren't much of the biggest companies
+
+Therefore, I am thinking about creating my own dataset with the MAGS companies (to lower load on myself)
+Currently only thing that LogoDet-3k has is Apple, while logo2k+ has apple old amazon nvidia and tesla
+
+I think i may try to get Claude to automate this task as it seems tedious
+
+## Day 3 - Dataset Work continued
+
+Past few days I was very sick, so I have not worked on this but I am back, 
+the goals for today are
+- Complete a quality dataset
+- Start training
+
+I have managed to get pictures of the mag7 brands and I went through and took out any outliers that shouldn't be there
+
+One thing that I am curious about is the watermark issue, how much will the watermarks on some data affect the model?
+
+Currently reading documentation as videos only show the bees/ants examples
+https://docs.pytorch.org/vision/stable/auto_examples/transforms/plot_transforms_getting_started.html#sphx-glr-auto-examples-transforms-plot-transforms-getting-started-py
+
+Learning what exactly a Tensor is
+https://www.youtube.com/watch?v=L35fFDpwIM4
+https://www.youtube.com/watch?v=kgOXgoceJGQ
+https://www.youtube.com/watch?v=lOGd6ysc2j4
+
+Tensors are a data structure that are specialized for gpu accelerated work
+Good for large data
+
+Using this vid for guidance 
+https://www.youtube.com/watch?v=CtzfbUwrYGI
+
+When transfer learning ImageNet normalization should be 
+mean = np.array([0.485, 0.456, 0.406])
+std = np.array([0.229, 0.224, 0.225])
+
+Digging deeper into ResNet
+https://www.youtube.com/watch?v=o_3mboe1jYI
+
+Digging into CNNs
+https://www.youtube.com/watch?v=QzY57FaENXg
+
+Thinking that maybe I should've used a jupyter notebook, but we digress
+
+Created a function that gathers the Training and Validation datasets along with classes that are determined by the folder names
+
+Moving onto training reading this documentation
+https://docs.pytorch.org/docs/2.14/generated/torch.optim.lr_scheduler.LRScheduler.html
+
+Created a model building function that builds the transfer training model prior to training
+ 
+
+    model = models.resnet18(weights='DEFAULT')
+    model.fc = nn.Linear(model.fc.in_features, len(x)) #creates final layer with 512 inputs that give 7 class scores
+    model.to(dev) #sends model to GPU or CPU
+
+This gets the resnet set and creates a final layer that has 512 inputs into however much classes needed for output from my model
+
+Out of curiosity read the first page of this paper on the resnet page
+https://arxiv.org/pdf/1512.03385
+
+When implementing training got interested in .train() from torch.nn.modules.module
+https://stackoverflow.com/questions/51433378/what-does-model-train-do-in-pytorch
+https://docs.pytorch.org/docs/2.14/generated/torch.nn.Module.html
+
+Completed the first training results below
+
+    train Loss: 0.0902  Acc: 0.9932
+    val Loss: 0.2818  Acc: 0.9293
+    Training complete in 13m 28s
+    Best val Acc: 0.9348
+
+
