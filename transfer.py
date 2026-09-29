@@ -3,14 +3,10 @@ from tempfile import TemporaryDirectory
 
 import numpy as np
 import os
-from PIL import Image
-
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optim
 
-import torchvision
 import torchvision.transforms as transforms
 from torch.backends import cudnn
 from torch.utils.data import Subset, DataLoader
@@ -98,7 +94,7 @@ def train_model(model, dataloaders, optimizer, scheduler, num_epochs=25, criteri
     """
     since = time.time() #tracks time of training
 
-    #Temp folder to save checkpoints and save initial weights, if val_accuracy does not improve somethiing needs to load back
+    #Temp folder to save checkpoints and save initial weights, if val_accuracy does not improve something needs to load back
     with TemporaryDirectory() as tmpdir:
         best_model_params_path = os.path.join(tmpdir, 'best_model.pth')
         torch.save(model.state_dict(), best_model_params_path)
@@ -111,9 +107,9 @@ def train_model(model, dataloaders, optimizer, scheduler, num_epochs=25, criteri
             #runs train then val in each epoch
             for phase in ['train', 'val']:
                 if phase == 'train':
-                    model.train() #enapbles ddropout/bathnorm updates
+                    model.train() #enapbles dropout/batch norm updates - learning
                 else:
-                    model.eval() #freezes them for consistent results
+                    model.eval() #freezes them for consistent results - testing
 
                 running_loss = 0.0
                 running_corrects = 0.0
