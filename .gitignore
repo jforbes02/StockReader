@@ -1,1 +1,22 @@
 /.env
+/mag7/
+
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+DerivedData/
+*.moved-aside
+*.pbxuser
+
+# PyCharm
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.venv-coreml/

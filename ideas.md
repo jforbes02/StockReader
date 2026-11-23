@@ -264,3 +264,94 @@ Some of my code from today below
 
 Tommorow I will work on learning Swift
 
+# Day 4 - Beginning of Swift
+Since I am trying our Swift for the first time I first need an IDE
+
+https://www.youtube.com/watch?v=n5X_V81OYnQ
+https://docs.swift.org/latest/documentation/the-swift-programming-language/thebasics
+
+Notes
+- I think that the let / var difference is pretty cool
+  - The concept of having constants and the constants being declared by type with ':' is pretty cool
+- In this language there are unsigned integers which is new to me (Python Main Lang)
+- Swift has size limits of ints while Python doesn't, I wonder how that (if it will) affect my code
+- Int and UInt
+- Everything in Swift has a type
+- If a float is not specified it will be treated as a Double
+- Its also interesting that anything can be a var/constant like 👍
+
+# Day 5 - Swift continued
+
+Hello today I will be reading more swift documentation and hopefully start writing some swift code
+
+While reading through documentation I learned the difference between Swift and SwiftUI
+
+https://www.youtube.com/watch?v=-VC3hIEL7eQ
+
+I am going through and I really want to make it apple vision pro compatible.
+I think I will make an attempt to that after ios
+
+# Day 6 - SwiftUI
+
+Had to cut yesterday short due to work.
+
+reading these docs
+https://developer.apple.com/tutorials/develop-in-swift
+
+Okay so I think im starting to understand SwiftUi
+
+What I want to do today is create the main screen which will hold a button that will start capturing with camera
+
+I thought to look at this resource from swiftui about recognizing text
+https://developer.apple.com/tutorials/develop-in-swift/extract-text-from-images
+
+I assume I will need some of this knowledge in order to work with my model
+
+https://www.youtube.com/watch?v=ik1QRc_kN9M
+
+So I will be using AvFoundation to create a custom camera that will connect to my backend
+
+Hindsight i think i will need to create a webhook in the backend to connect the camera to the model? Or maybe there is a way to integrate with just the file
+
+# Day 7 - Understanding The Problems
+
+After thinking/reading through a little more I began to wonder if AVFoundation was enough to get the output I desire
+
+I want the stock to show up as maybe a 3D image (AR)
+
+After a bit of research the steps I have to take are clear
+
+1. Create a camera instance that integrates the trained ML data
+   - I most likely have to implement something that allows fast calls since it might be slow
+2. Implement the stock data endpoint where whenever a stock is detected the data is retrieved
+   - Have to figure out how to make sure that it coincides correctly with the symbol
+3. Implement AR or RealityKit into camera view so that it floats in 3D space and isn't just 2D
+4. Create a graph from the data
+
+An issue that I came across is the ML model I currently have is a classifier not a detector so I would need a detector in order to have the correct location of where it would be
+
+I wonder if there is a way to bypass this
+
+# Day 8
+
+Took a mental break as life was taking a toll on me, ready to finish this projects MVP and get it working
+
+Doing research now on different ways to utilize this current ML model
+
+So in order to utilize my ml model inside of the SwiftUI app I need to convert my model to Core ML then build a camera that feeds frames into a ML request function
+
+First i need to create a function that does this
+
+https://apple.github.io/coremltools/docs-guides/source/convert-pytorch-workflow.html
+
+So, it looks as if coremltools is incompatible with python 3.13 so i will need to create a venv with 3.11 in order to get this conversion
+
+So i now have the Core ML class
+
+Going onto the SwiftUI I learned that @Published variables are variables that force a page refresh whenever the variable is changed (Combine Framework)
+
+I really like Xcodes features
+The application of starting entire functions when they are needed whenever there is an error is really nice
+
+https://www.youtube.com/watch?v=FWLlI4H4ONA
+https://www.youtube.com/watch?v=p6GA8ODlnX0
