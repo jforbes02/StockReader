@@ -10,11 +10,31 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Knock, knock")
-        Button(action: <#T##() -> Void#>, label: <#T##() -> View#>)
+        VStack(spacing: 12){
+            Image(systemName: "sparkles")
+                .font(.system(size: 48))
+                .foregroundStyle(.tint)
+            Text("Welcome!")
+                .font(.largeTitle.bold())
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+        .safeAreaInset(edge: .bottom){
+            Button{
+                
+            } label: {
+                Text("Start Camera")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.glassProminent)
+            .controlSize(.large)
+            .padding()
+        }
     }
 }
+
 
 #Preview {
     ContentView()
 }
+

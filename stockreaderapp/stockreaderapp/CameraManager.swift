@@ -171,3 +171,4 @@ class CameraManager: NSObject, ObservableObject, AVCaptureFileOutputRecordingDel
         }
     }
 }
+
