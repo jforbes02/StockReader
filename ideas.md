@@ -355,3 +355,15 @@ The application of starting entire functions when they are needed whenever there
 
 https://www.youtube.com/watch?v=FWLlI4H4ONA
 https://www.youtube.com/watch?v=p6GA8ODlnX0
+
+Day 9 - Frontend work
+
+I have been able to get a start to the custom camera
+
+Now in order to test it and validate it I am creating the home screen along with the camera screen
+
+https://zhonguncle.github.io/blogs/ef396bd58ea994c892978cc3f5eeaa2c.html
+
+Navigation View is deprecated apparently, need to use navigationstack
+
+Worked on a bit of the frontend, will figure out what is needed once i get my cable to connect to my phone in order to test the camera functionality

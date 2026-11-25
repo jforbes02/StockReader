@@ -29,7 +29,7 @@ class CameraManager: NSObject, ObservableObject, AVCaptureFileOutputRecordingDel
     @Published var isRecording = false
     @Published var recordedVideoURL: URL?
     private var outputURL: URL?
-    
+    private var isConfigured = false
     
     // AvFoundation Comps
     let session = AVCaptureSession()
@@ -85,6 +85,14 @@ class CameraManager: NSObject, ObservableObject, AVCaptureFileOutputRecordingDel
         sessionQueue.async {
             [weak self] in
             guard let self = self else { return }
+            
+            
+            //
+            if self.isConfigured {
+                if !self.session.isRunning {self.session.startRunning()}
+                return
+            }
+            self.isConfigured = true
             
             // sets session protect
             self.session.beginConfiguration()
@@ -159,15 +167,22 @@ class CameraManager: NSObject, ObservableObject, AVCaptureFileOutputRecordingDel
         }
     }
     
+    
+    //the capture output runs the model 60 times per frame which is a bit odd to me
+    //not sure if it needs to run that much
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from
                        connection: AVCaptureConnection) {
         
+        
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {return}
-        guard let result = classifier?.findLogo(pixelBuffer) else {return}
+        
+        //Changed result so that the stock disappears when not detected
+        let result = classifier?.findLogo(pixelBuffer)
+        
         
         DispatchQueue.main.async {
-            self.detectedCompany = result.label
-            self.detectedBoundingBox = result.boundingBox
+            self.detectedCompany = result?.label
+            self.detectedBoundingBox = result?.boundingBox
         }
     }
 }
